@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/470/470199.png">
+    <meta charset="UTF-8">
+    <title>EMS App</title>
+</head>
+
+<style>
+    body {
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    nav {
+        background-color: navy !important;
+
+    }
+
+    .navbar-brand {
+        color: whitesmoke !important;
+        font-size: 30px !important;
+        font-weight: bold;
+    }
+
+    .card {
+        box-shadow: rgba(14, 30, 37, 0.12) 1px 2px 2px 0px, rgba(14, 30, 37, 0.32) 1px 2px 2px 0px;
+    }
+
+    .card-body {
+        text-align: center;
+    }
+
+    .table-responsive {
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
+
+    th {
+        text-align: center;
+        font-size: 18px !important;
+    }
+
+    td {
+        text-align: center;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    label {
+        font-weight: 500;
+    }
+</style>
+
+<body>
+<!-- model for create-->
+
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div th:if="${success}" class="alert alert-success" role="alert">
+                    <p th:text="${success}"></p>
+                </div>
+                <div class="alert alert-primary" role="alert">
+                    <p th:if="${error}" th:text="${error}">Please Enter Valid Data</p>
+                </div>
+
+                <form class="p-2" th:action="@{/employeepersist}" th:object="${employee}" method="post" id="createform">
+                    <center>
+                        <h4 style="font-family: 'Times New Roman', Times, serif;">Add Employee</h4>
+                    </center>
+
+                    <div class="row p-2">
+                        <label class="p-1">Employee Name </label>
+                        <input type="text" th:field="*{empname}" class="form-control"
+                               placeholder="name" required>
+                    </div>
+
+                    <div class="row p-2">
+                        <label class="p-1" >Email</label>
+                        <input type="text" th:field="*{email}" class="form-control"
+                               placeholder="email address">
+                    </div>
+
+                    <div class="row p-2">
+                        <label class="p-1" >Salary</label>
+                        <input type="text" th:field="*{salary}" class="form-control"
+                               placeholder="salary" required>
+                    </div>
+
+                    <div class="row p-2">
+                        <label  class="col-form-label"> Department
+                            <select  class="form-control" name="department">
+                                <option th:each ="department : ${departmentList}"
+                                        th:value="${department.departmentId}"
+                                        th:text="${department.departmentName}"></option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success mt-3 mb-2">Add Employee</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
